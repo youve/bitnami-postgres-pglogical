@@ -9,6 +9,9 @@ set -o nounset
 set -o pipefail
 #set -o xtrace
 
+# Clear /tmp of lock files in case of ungraceful shutdown
+rm -rf /tmp/.*
+
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/libpostgresql.sh

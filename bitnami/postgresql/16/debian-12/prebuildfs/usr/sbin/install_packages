@@ -7,6 +7,14 @@ n=0
 max=2
 export DEBIAN_FRONTEND=noninteractive
 
+# Add postgres repository, because debian-12 only has postgres 15.
+# https://wiki.postgresql.org/wiki/Apt
+apt-get update -qq
+# This creates the script for adding the postgres repo
+apt install -y postgresql-common
+# Add postgres repo
+/usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+
 until [ $n -gt $max ]; do
     set +e
     (
