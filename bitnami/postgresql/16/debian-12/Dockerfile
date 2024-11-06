@@ -52,6 +52,10 @@ RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
 RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 
+# Copy /usr/lib/postgresql/16/lib/pglogical.so to correct place
+RUN cp /usr/lib/postgresql/16/lib/pglogical* /opt/bitnami/postgresql/lib/ && \
+    cp /usr/share/postgresql/16/extension/pglogical* /opt/bitnami/postgresql/share/extension/
+
 COPY rootfs /
 RUN /opt/bitnami/scripts/postgresql/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
